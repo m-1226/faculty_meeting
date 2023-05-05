@@ -1,10 +1,12 @@
 <?php
-require_once "db.php";
-require_once "functions.php";
-require_once "error_handler/login_error_handler.php";
 
-// Start the session
-session_start();
+// start session if not started
+if(session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Add a new session variable to store error message
+$_SESSION["error_message"] = "";
 
 // Check if the user is already logged in
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
@@ -51,20 +53,23 @@ if (isset($_POST["login_form"])) {
                     header("Location: meetings.php");
                     exit();
                 } else {
-                    $_SESSION["error_message"] = "الإيميل المسجل أو كلمة المرور غير صحيحة";
+                    $_SESSION["error_message"] = "كلمة المرور غير صحيحة";
                 }
             } else {
                 $_SESSION["error_message"] = "Your account has been disabled";
             }
         } else {
-            $_SESSION["error_message"] = "User not found";
+            $_SESSION["error_message"] = "هذا الإيميل غير مسجل في قاعدة البيانات";
         }
     } else {
         $_SESSION["error_message"] = "Invalid email format";
     }
+
+    // Save the email entered by the user
+    $_SESSION["email_input"] = $email;
 }
 
-// If the form has not been submitted or if there was an error, redirect back to the login page
-header("Location: loginn.php");
-exit();
+// Save the password entered by the user
+$_SESSION["password_input"] = $password;
+
 ?>
