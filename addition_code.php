@@ -158,6 +158,10 @@ foreach ($_POST as $btn => $value)
 
 		case "add_member_btn":
 			$name = clean_data($_POST["name"]);
+			if (empty($name)) {
+				$name_error = "Name is required.";
+				$has_error = true;
+			}
 			$gender = clean_data($_POST["gender"]);
 			$email = is_valid_email($_POST["email"]);
 			$job_title = clean_data($_POST["job_title"]);

@@ -29,7 +29,7 @@ if (empty(@$_SESSION["app_name"]))
 
 if (empty(@$_SESSION["image"]))
 {
-    $user_stmt = $conn->prepare("SELECT name, image FROM p39_users WHERE user_id = ?");
+    $user_stmt = $conn->prepare("SELECT name, picture FROM p39_users WHERE user_id = ?");
     $user_stmt->bind_param("i", $_SESSION["user_id"]);
     $user_stmt->execute();
     $user_result = $user_stmt->get_result();

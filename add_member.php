@@ -9,6 +9,11 @@ if (session_status() === PHP_SESSION_NONE)
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .error {
+  color: red;
+}
+    </style>
 <?php
 Head("اضافة عضو");
 ?>
@@ -164,6 +169,7 @@ footer();
 
 <!-- font Awesome -->
 <script src="https://kit.fontawesome.com/eb7dada2f7.js" crossorigin="anonymous"></script>
+<script src="error_handler\add_member_error_hander.js"></script>
 </body>
 
 </html>
